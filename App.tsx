@@ -5,6 +5,7 @@ import { useFonts, Jost_400Regular, Jost_600SemiBold } from '@expo-google-fonts/
 
 import { Welcome } from './src/screens/Welcome'
 import { Loading } from './src/screens/Loading'
+import { UserIdentification } from './src/screens/UserIdentification'
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
@@ -19,7 +20,7 @@ export default function App() {
 	return (
 		<>
 			<StatusBar style='dark' backgroundColor='transparent' />
-			<Welcome />
+			<UserIdentification />
 		</>
 	)
 }
