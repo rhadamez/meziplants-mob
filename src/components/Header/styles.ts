@@ -9,7 +9,6 @@ export const Container = styled.View`
   justify-content: space-between;
   align-items: center;
   margin-top: ${getStatusBarHeight()}px;
-  padding: 20px;
 `
 
 export const ProfileName = styled.View`
