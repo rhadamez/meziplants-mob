@@ -1,3 +1,4 @@
+import { Platform } from 'react-native'
 import styled from 'styled-components/native'
 import { getStatusBarHeight, getBottomSpace } from 'react-native-iphone-x-helper'
 import colors from '../../styles/colors'
@@ -9,7 +10,7 @@ export const Container = styled.View`
   align-items: center;
   justify-content: space-between;
   padding-top: ${getStatusBarHeight()}px;
-  padding-bottom: ${getBottomSpace()}px;
+  padding-bottom: ${Platform.OS === 'ios' ? getBottomSpace() : '30'}px;
   background-color: ${colors.background};
 `
 
