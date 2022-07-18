@@ -14,7 +14,7 @@ export function Confirmation() {
 				<S.Description>Agora vamos começar a cuidar das suas plantinhas com muito cuidado.</S.Description>
 			</S.Header>
 			<S.Footer>
-				<Button title='Confirmar'/>
+				<Button title='Confirmar' onPress={() => navigation.navigate('PlantSelect')}/>
 			</S.Footer>
 		</S.Container>
 	)

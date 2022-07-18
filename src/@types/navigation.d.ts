@@ -4,6 +4,7 @@ export declare global {
       Welcome: undefined
       UserIdentification: undefined
       Confirmation: { name: string }
+      PlantSelect: undefined
     }
   }
 }
