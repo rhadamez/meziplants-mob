@@ -21,6 +21,7 @@
     ],
     "ignorePatterns": [
       "node_modules",
+      "commitlint.config.js",
       "babel.config.js",
       "index.js",
       "metro.config.js"
