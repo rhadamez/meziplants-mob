@@ -24,8 +24,10 @@ type PlantProps = {
 }
 
 export function PlantSelect() {
+	const [environmentSelected, setEnvironmentSelected] = useState('all')
 	const [environments, setEnvironments] = useState<EnvironmentProps[]>([])
 	const [plants, setPlants] = useState<PlantProps[]>([])
+	const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([])
 
 	useEffect(() => {
 		async function fetchEnvironment() {
@@ -50,6 +52,16 @@ export function PlantSelect() {
 		fetchPlants()
 	}, [])
 
+	function handleEnvironmentSelected(environment: string) {
+		setEnvironmentSelected(environment)
+
+		if(environment === 'all') return setFilteredPlants(plants)
+
+		const filtered = plants.filter(plant => plant.environments.includes(environment))
+
+		setFilteredPlants(filtered)
+	}
+
 	return (
 		<S.Container>
 			<S.Header>
@@ -69,14 +81,18 @@ export function PlantSelect() {
 					data={environments}
 					keyExtractor={(item: any) => item.key}
 					renderItem={({ item }) => (
-						<EnvironmentButton title={item.title} />
+						<EnvironmentButton
+							title={item.title}
+							active={item.key === environmentSelected}
+							onPress={() => handleEnvironmentSelected(item.key)}
+						/>
 					)}
 					contentContainerStyle={{ paddingHorizontal: 0 }}
 				/>
 			</S.ListContainer>
 			<S.PlantsContainer>
 				<S.Plants
-					data={plants}
+					data={filteredPlants}
 					keyExtractor={(item: any) => item.id}
 					renderItem={({ item }) => (
 						<PlantCardPrimary data={item} />
