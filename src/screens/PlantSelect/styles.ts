@@ -1,9 +1,7 @@
-import { FlatList, FlatListProps } from 'react-native'
+import { FlatList } from 'react-native'
 import styled from 'styled-components/native'
 import colors from '../../styles/colors'
 import fonts from '../../styles/fonts'
-
-import { EnvironmentProp } from './'
 
 export const Container = styled.View`
   flex: 1;
@@ -34,4 +32,12 @@ export const ListContainer = styled.View``
 
 export const EnvironmentList = styled<any>(FlatList).attrs({
 	showsHorizontalScrollIndicator: false
-})`` as unknown as new (props: FlatListProps<EnvironmentProp>) => FlatList<EnvironmentProp>
+})``
+
+export const PlantsContainer = styled.View`
+  flex: 1;
+  margin-top: 10px;
+`
+
+export const Plants = styled<any>(FlatList).attrs({
+})``
