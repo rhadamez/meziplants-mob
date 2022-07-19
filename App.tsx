@@ -5,7 +5,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { useFonts, Jost_400Regular, Jost_600SemiBold } from '@expo-google-fonts/jost'
 
 import { NavigationContainer } from '@react-navigation/native'
-import { Loading } from './src/screens/Loading'
+import { Loading } from './src/components/Loading'
 import Routes from './src/routes'
 
 export default function App() {
