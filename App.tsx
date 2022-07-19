@@ -1,5 +1,6 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 import { useFonts, Jost_400Regular, Jost_600SemiBold } from '@expo-google-fonts/jost'
 
@@ -18,9 +19,11 @@ export default function App() {
 	} 
 
 	return (
-		<NavigationContainer>
-			<StatusBar style='dark' backgroundColor='transparent' />
-			<Routes />
-		</NavigationContainer>
+		<GestureHandlerRootView style={{flex: 1}}>
+			<NavigationContainer>
+				<StatusBar style='dark' backgroundColor='transparent' />
+				<Routes />
+			</NavigationContainer>
+		</GestureHandlerRootView>
 	)
 }
