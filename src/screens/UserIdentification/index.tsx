@@ -14,7 +14,13 @@ export function UserIdentification() {
 
 		await AsyncStorage.setItem('@meziplants:name', name)
 
-		navigation.navigate('Confirmation', { name })
+		navigation.navigate('Confirmation', {
+			title: 'Prontinho',
+			subtitle: 'Agora vamos começar a cuidar das suas plantinhas com muito cuidado.',
+			buttonTitle: 'Começar',
+			icon: 'smile',
+			nextScreen: 'MyPlants'
+		})
 	}
 
 	return (

@@ -8,6 +8,7 @@ import { PlantSelect } from '../screens/PlantSelect'
 import { PlantSave } from '../screens/PlantSave'
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { MyPlants } from '../screens/MyPlants'
 
 
 const { Navigator, Screen } = createNativeStackNavigator()
@@ -19,7 +20,7 @@ export function StackRoutes() {
 		async function loadUser() {
 			const hasName = await AsyncStorage.getItem('@meziplants:name')
 			if(hasName) navigation.navigate('PlantSelect')
-			else navigation.navigate('PlantSelect')
+			else navigation.navigate('Welcome')
 		}
 
 		loadUser()
@@ -32,6 +33,7 @@ export function StackRoutes() {
 			<Screen name='Confirmation' component={Confirmation} />
 			<Screen name='PlantSelect' component={PlantSelect} />
 			<Screen name='PlantSave' component={PlantSave} />
+			<Screen name='MyPlants' component={MyPlants} />
 		</Navigator>
 	)
 }
