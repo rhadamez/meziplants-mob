@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native'
 import { useEffect, useState } from 'react'
 import { ActivityIndicator } from 'react-native'
 import { EnvironmentButton } from '../../components/EnvironmentButton'
@@ -27,6 +28,7 @@ type PlantProps = {
 }
 
 export function PlantSelect() {
+	const navigation = useNavigation()
 	const [environmentSelected, setEnvironmentSelected] = useState('all')
 	const [environments, setEnvironments] = useState<EnvironmentProps[]>([])
 
@@ -87,6 +89,10 @@ export function PlantSelect() {
 		setFilteredPlants(filtered)
 	}
 
+	function handlePlantSelect(plant: PlantProps) {
+		navigation.navigate('PlantSave', { plant })
+	}
+
 	if(isLoading) return <Loading />
 
 	return (
@@ -122,12 +128,12 @@ export function PlantSelect() {
 					data={filteredPlants}
 					keyExtractor={(item: any) => item.id}
 					renderItem={({ item }) => (
-						<PlantCardPrimary data={item} />
+						<PlantCardPrimary data={item} onPress={() => handlePlantSelect(item)}/>
 					)}
 					numColumns={2}
 					onEndReachedThreshold={0.1}
 					onEndReached={({ distanceFromEnd }) => handleFetchMore(distanceFromEnd)}
-					ListFooterComponent={loadingMore && <ActivityIndicator color={colors.green} />} />
+					ListFooterComponent={loadingMore && <S.Spinner color={colors.green} />} />
 			</S.PlantsContainer>
 		</S.Container>
 	)

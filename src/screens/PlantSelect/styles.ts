@@ -41,3 +41,5 @@ export const PlantsContainer = styled.View`
 
 export const Plants = styled<any>(FlatList).attrs({
 })``
+
+export const Spinner = styled.ActivityIndicator``
