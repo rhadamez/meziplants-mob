@@ -8,6 +8,7 @@ import { Header } from '../../components/Header'
 import { loadPlants, PlantProps } from '../../libs/storage'
 import * as S from './styles'
 import { PlantCardSecondary } from '../../components/PlantCardSecondary'
+import { Loading } from '../../components/Loading'
 
 export function MyPlants() {
 	const [myPlants, setMyPlants] = useState<PlantProps[]>([])
@@ -31,7 +32,6 @@ export function MyPlants() {
 	return (
 		<S.Container>
 			<Header />
-
 			<S.Spotlight>
 				<S.SpotlightImage source={waterdrop} />
 				<S.SpotlightText>{nextWaterd}</S.SpotlightText>
@@ -39,15 +39,21 @@ export function MyPlants() {
 
 			<S.Plants>
 				<S.PlantsTitle>Próximas regadas</S.PlantsTitle>
-				<S.PlantsList
-					data={myPlants}
-					keyExtractor={(item) => item.id}
-					renderItem={({ item }) => (
-						<PlantCardSecondary data={item}/>
-					)}
-					showsVerticalScrollIndicator={false}
-				/>
+				{loading ? (
+					<Loading />
+				) : (
+					<S.PlantsList
+						data={myPlants}
+						keyExtractor={(item) => item.id}
+						renderItem={({ item }) => (
+							<PlantCardSecondary data={item}/>
+						)}
+						showsVerticalScrollIndicator={false}
+					/>
+				)}
 			</S.Plants>
+
+
 		</S.Container>
 	)
 }

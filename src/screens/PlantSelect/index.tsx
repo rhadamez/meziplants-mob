@@ -80,8 +80,6 @@ export function PlantSelect() {
 		navigation.navigate('PlantSave', { plant })
 	}
 
-	if(isLoading) return <Loading />
-
 	return (
 		<S.Container>
 			<S.Header>
@@ -111,16 +109,21 @@ export function PlantSelect() {
 				/>
 			</S.ListContainer>
 			<S.PlantsContainer>
-				<S.Plants
-					data={filteredPlants}
-					keyExtractor={(item: any) => item.id}
-					renderItem={({ item }) => (
-						<PlantCardPrimary data={item} onPress={() => handlePlantSelect(item)}/>
-					)}
-					numColumns={2}
-					onEndReachedThreshold={0.1}
-					onEndReached={({ distanceFromEnd }) => handleFetchMore(distanceFromEnd)}
-					ListFooterComponent={loadingMore && <S.Spinner color={colors.green} />} />
+				{isLoading ? (
+					<Loading />
+				) : (
+					<S.Plants
+						data={filteredPlants}
+						keyExtractor={(item: any) => item.id}
+						renderItem={({ item }) => (
+							<PlantCardPrimary data={item} onPress={() => handlePlantSelect(item)}/>
+						)}
+						numColumns={2}
+						onEndReachedThreshold={0.1}
+						onEndReached={({ distanceFromEnd }) => handleFetchMore(distanceFromEnd)}
+						ListFooterComponent={loadingMore && <S.Spinner color={colors.green} />} />
+				)}
+
 			</S.PlantsContainer>
 		</S.Container>
 	)
