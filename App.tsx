@@ -7,8 +7,6 @@ import { useFonts, Jost_400Regular, Jost_600SemiBold } from '@expo-google-fonts/
 import { NavigationContainer } from '@react-navigation/native'
 import { Loading } from './src/components/Loading'
 import Routes from './src/routes'
-import { MyPlants } from './src/screens/MyPlants'
-
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
@@ -18,13 +16,13 @@ export default function App() {
 
 	if(!fontsLoaded) {
 		return <Loading />
-	} 
+	}
 
 	return (
 		<GestureHandlerRootView style={{flex: 1}}>
 			<NavigationContainer>
 				<StatusBar style='dark' backgroundColor='transparent' />
-				<MyPlants />
+				<Routes />
 			</NavigationContainer>
 		</GestureHandlerRootView>
 	)

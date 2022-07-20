@@ -46,7 +46,6 @@ export function MyPlants() {
 						<PlantCardSecondary data={item}/>
 					)}
 					showsVerticalScrollIndicator={false}
-					contentContainerStyle={{ flex: 1 }}
 				/>
 			</S.Plants>
 		</S.Container>

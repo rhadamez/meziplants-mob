@@ -4,11 +4,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Welcome } from '../screens/Welcome'
 import { UserIdentification } from '../screens/UserIdentification'
 import { Confirmation } from '../screens/Confirmation'
-import { PlantSelect } from '../screens/PlantSelect'
 import { PlantSave } from '../screens/PlantSave'
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { MyPlants } from '../screens/MyPlants'
+import { TabRoutes } from './tab.routes'
 
 
 const { Navigator, Screen } = createNativeStackNavigator()
@@ -31,9 +30,9 @@ export function StackRoutes() {
 			<Screen name='Welcome' component={Welcome} />
 			<Screen name='UserIdentification' component={UserIdentification} />
 			<Screen name='Confirmation' component={Confirmation} />
-			<Screen name='PlantSelect' component={PlantSelect} />
+			<Screen name='PlantSelect' component={TabRoutes} />
 			<Screen name='PlantSave' component={PlantSave} />
-			<Screen name='MyPlants' component={MyPlants} />
+			<Screen name='MyPlants' component={TabRoutes} />
 		</Navigator>
 	)
 }
