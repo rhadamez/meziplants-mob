@@ -8,6 +8,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { Loading } from './src/components/Loading'
 import Routes from './src/routes'
 
+
 export default function App() {
 	const [fontsLoaded] = useFonts({
 		Jost_400Regular,

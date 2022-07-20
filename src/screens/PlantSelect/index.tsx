@@ -1,6 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
 import { useEffect, useState } from 'react'
-import { ActivityIndicator } from 'react-native'
 import { EnvironmentButton } from '../../components/EnvironmentButton'
 import { Header } from '../../components/Header'
 import { Loading } from '../../components/Loading'
