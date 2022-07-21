@@ -1,7 +1,12 @@
-import { getBottomSpace } from 'react-native-iphone-x-helper'
 import styled from 'styled-components/native'
+import { ScrollView, ScrollViewProps } from 'react-native'
+import { getBottomSpace } from 'react-native-iphone-x-helper'
 import colors from '../../styles/colors'
 import fonts from '../../styles/fonts'
+
+export const Scroll = styled<ScrollViewProps | any>(ScrollView).attrs({
+	showsVerticalScrollIndicator: false
+})``
 
 export const Container = styled.View`
   flex: 1;

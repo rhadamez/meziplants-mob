@@ -7,8 +7,7 @@ import waterdrop from '../../assets/waterdrop.png'
 import { Button } from '../../components/Button'
 import * as S from './styles'
 import { Alert, Platform } from 'react-native'
-import { loadPlants, PlantProps, plantSave } from '../../libs/storage'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import { PlantProps, plantSave } from '../../libs/storage'
 
 export function PlantSave() {
 	const route = useRoute()
@@ -56,40 +55,42 @@ export function PlantSave() {
 	}
 
 	return (
-		<S.Container>
-			<S.PlantInfo>
-				<SvgFromUri uri={plant.photo} height={150} width={150}/>
-				<S.PlantName>{plant.name}</S.PlantName>
-				<S.PlantDescription>
-					{plant.about}
-				</S.PlantDescription>
-			</S.PlantInfo>
+		<S.Scroll>
+			<S.Container>
+				<S.PlantInfo>
+					<SvgFromUri uri={plant.photo} height={150} width={150}/>
+					<S.PlantName>{plant.name}</S.PlantName>
+					<S.PlantDescription>
+						{plant.about}
+					</S.PlantDescription>
+				</S.PlantInfo>
 
-			<S.Controller>
-				<S.TipController>
-					<S.Image source={waterdrop} />
-					<S.TipText>{plant.water_tips}</S.TipText>
-				</S.TipController>
-				<S.AlertLabel>
+				<S.Controller>
+					<S.TipController>
+						<S.Image source={waterdrop} />
+						<S.TipText>{plant.water_tips}</S.TipText>
+					</S.TipController>
+					<S.AlertLabel>
           Escolha o melhor horário para ser lembrado
-				</S.AlertLabel>
+					</S.AlertLabel>
 
-				{showDatePicker && (
-					<DateTimePicker
-						value={selectedDateTime}
-						mode='time'
-						display='default'
-						onChange={(event, dateTime) => handleChangeTime(event, dateTime)} />
-				)}
+					{showDatePicker && (
+						<DateTimePicker
+							value={selectedDateTime}
+							mode='time'
+							display='default'
+							onChange={(event, dateTime) => handleChangeTime(event, dateTime)} />
+					)}
 
-				{ Platform.OS === 'android' && (
-					<S.DateTimePickerContainer onPress={handleOpenDatetimePickerForAndroid}>
-						<S.DateTimePickerText>{`Mudar ${format(selectedDateTime, 'HH:mm')}`}</S.DateTimePickerText>
-					</S.DateTimePickerContainer>
-				)}
+					{ Platform.OS === 'android' && (
+						<S.DateTimePickerContainer onPress={handleOpenDatetimePickerForAndroid}>
+							<S.DateTimePickerText>{`Mudar ${format(selectedDateTime, 'HH:mm')}`}</S.DateTimePickerText>
+						</S.DateTimePickerContainer>
+					)}
 
-				<Button title='Cadastrar Planta' onPress={handleSave} />
-			</S.Controller>
-		</S.Container>
+					<Button title='Cadastrar Planta' onPress={handleSave} />
+				</S.Controller>
+			</S.Container>
+		</S.Scroll>
 	)
 }
