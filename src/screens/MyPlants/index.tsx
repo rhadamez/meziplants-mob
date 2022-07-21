@@ -20,8 +20,10 @@ export function MyPlants() {
 		async function loadStorageData() {
 			const plantsStoraged = await loadPlants()
 
-			const nextTime = formatDistance(new Date(plantsStoraged[0].dateTimeNotification).getTime(), new Date(), { locale: ptBR })
-			setNextWaterd(`Não esqueça de regar a ${plantsStoraged[0].name} à ${nextTime} horas.`)
+			if(plantsStoraged.length > 0) {
+				const nextTime = formatDistance(new Date(plantsStoraged[0].dateTimeNotification).getTime(), new Date(), { locale: ptBR })
+				setNextWaterd(`Não esqueça de regar a ${plantsStoraged[0].name} à ${nextTime} horas.`)
+			}
 
 			setMyPlants(plantsStoraged)
 			setLoading(false)
@@ -63,14 +65,19 @@ export function MyPlants() {
 				{loading ? (
 					<Loading />
 				) : (
-					<S.PlantsList
-						data={myPlants}
-						keyExtractor={(item) => item.id}
-						renderItem={({ item }) => (
-							<PlantCardSecondary data={item} handleRemove={() => handleRemove(item)}/>
+					<>
+						{myPlants.length > 0 ? (
+							<S.PlantsList
+								data={myPlants}
+								keyExtractor={(item) => item.id}
+								renderItem={({ item }) => (
+									<PlantCardSecondary data={item} handleRemove={() => handleRemove(item)}/>
+								)}
+								showsVerticalScrollIndicator={false} />
+						) : (
+							<S.NoPlants>Não há plantas</S.NoPlants>
 						)}
-						showsVerticalScrollIndicator={false}
-					/>
+					</>
 				)}
 			</S.Plants>
 

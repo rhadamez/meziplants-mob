@@ -49,4 +49,4 @@ export const PlantsList = styled.FlatList`
   flex: 1;
 `
 
-export const PlantName = styled.Text``
+export const NoPlants = styled.Text``
