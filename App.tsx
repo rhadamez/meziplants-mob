@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
@@ -12,6 +12,7 @@ import Routes from './src/routes'
 import { PlantProps } from './src/libs/storage'
 
 export default function App() {
+	const [, setTemp] = useState<any>()
 	const [fontsLoaded] = useFonts({
 		Jost_400Regular,
 		Jost_600SemiBold
@@ -21,7 +22,7 @@ export default function App() {
 		const subscription = Notifications.addNotificationReceivedListener(
 			async notification => {
 				const data = notification.request.content.data.plant as PlantProps
-				console.log(data)
+				setTemp(data)
 			})
 
 		return () => subscription.remove()

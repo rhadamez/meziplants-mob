@@ -17,10 +17,8 @@ export interface PlantProps {
 }
 
 export interface StoragePlantProps {
-  [id: string]: {
-    data: PlantProps
+    plant: PlantProps
     notificationId: string
-  }
 }
 
 export async function plantSave(plant: PlantProps): Promise<void> {
@@ -56,16 +54,11 @@ export async function plantSave(plant: PlantProps): Promise<void> {
 		})
 
 		const data = await AsyncStorage.getItem('@meziplants:plants')
-		const oldPlants = data ? (JSON.parse(data) as StoragePlantProps) : {}
+		const oldPlants = data ? (JSON.parse(data) as StoragePlantProps[]) : []
 
-		const newPlant = {
-			[plant.id]: {
-				data: plant,
-				notificationId
-			}
-		}
+		const newPlant = { plant, notificationId }
 
-		await AsyncStorage.setItem('@meziplants:plants', JSON.stringify({...newPlant, ...oldPlants}))
+		await AsyncStorage.setItem('@meziplants:plants', JSON.stringify([newPlant, ...oldPlants]))
 	} catch(err) {
 		throw new Error(err)
 	}
@@ -73,13 +66,11 @@ export async function plantSave(plant: PlantProps): Promise<void> {
 
 export async function loadPlants(): Promise<PlantProps[]> {
 	const data = await AsyncStorage.getItem('@meziplants:plants')
-	const plants = data ? (JSON.parse(data) as StoragePlantProps) : {}
+	const plants = data ? (JSON.parse(data) as StoragePlantProps[]) : []
 
-	const plantsSorted = Object.keys(plants).map(plant => {
-		return { ...plants[plant].data}
-	})
+	const plantsFiltered = plants.map(stored => stored.plant)
 
-	plantsSorted.sort((a, b) => {
+	const plantsSorted = plantsFiltered.sort((a, b) => {
 		const dateA = Math.floor(new Date(a.dateTimeNotification).getTime() / 1000)
 		const dateB = Math.floor(new Date(b.dateTimeNotification).getTime() / 1000)
 		return dateA - dateB
@@ -88,11 +79,18 @@ export async function loadPlants(): Promise<PlantProps[]> {
 	return plantsSorted
 }
 
+export async function loadNotifications(): Promise<StoragePlantProps[]> {
+	const data = await AsyncStorage.getItem('@meziplants:plants')
+	const plants = data ? (JSON.parse(data) as StoragePlantProps[]) : []
+	return plants
+}
+
 export async function removePlant(id: string): Promise<void> {
 	try {
-		const plants = await loadPlants()
-		await Notifications.cancelScheduledNotificationAsync(plants[id].notificationId)
-		delete plants[id]
+		const plants = (await loadPlants()).filter(p => p.id !== id)
+		const { notificationId } = (await loadNotifications()).find(n => n.notificationId == id)
+
+		await Notifications.cancelScheduledNotificationAsync(notificationId)
 		await AsyncStorage.setItem('@meziplants:plants', JSON.stringify(plants))
 	} catch(err) {
 		console.log(err)
