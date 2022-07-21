@@ -1,7 +1,9 @@
 import styled from 'styled-components/native'
-import { RectButton } from 'react-native-gesture-handler'
+import { RectButton, Swipeable } from 'react-native-gesture-handler'
 import colors from '../../styles/colors'
 import fonts from '../../styles/fonts'
+
+export const ContainerSwap = styled<any>(Swipeable)``
 
 export const Container = styled(RectButton)`
   width: 100%;
@@ -36,4 +38,22 @@ export const Time = styled.Text`
   font-size: 16px;
   font-family: ${fonts.heading};
   color: ${colors.body_dark};
+`
+
+export const ButtonRemoveContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`
+
+export const ButtonRemove = styled<any>(RectButton)`
+  width: 100px;
+  height: 85px;
+  margin: 15px 0;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  right: 10px;
+  background-color: ${colors.red};
 `
