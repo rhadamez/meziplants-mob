@@ -38,7 +38,8 @@ export function PlantSave() {
 		try {
 			await plantSave({
 				...plant,
-				dateTimeNotification: selectedDateTime
+				dateTimeNotification: selectedDateTime,
+				hour: format(selectedDateTime, 'HH:mm')
 			})
 
 			navigation.navigate('Confirmation', {

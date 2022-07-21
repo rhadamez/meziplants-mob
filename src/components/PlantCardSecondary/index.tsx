@@ -12,16 +12,17 @@ interface PlantProps extends RectButtonProps {
     photo: string
     hour: string
   }
+  handleRemove: () => void
 }
 
-export function PlantCardSecondary({ data, ...rest }: PlantProps) {
+export function PlantCardSecondary({ data, handleRemove, ...rest }: PlantProps) {
 	return (
 		<S.ContainerSwap
 			overshootRight={false}
 			renderRightActions={() => (
 				<Animated.View>
 					<S.ButtonRemoveContainer>
-						<S.ButtonRemove>
+						<S.ButtonRemove onPress={handleRemove}>
 							<Feather name='trash' size={32} color={colors.white}/>
 						</S.ButtonRemove>
 					</S.ButtonRemoveContainer>
